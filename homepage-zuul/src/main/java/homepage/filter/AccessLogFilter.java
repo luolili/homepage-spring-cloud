@@ -41,7 +41,7 @@ public class AccessLogFilter extends ZuulFilter {
 
 
         long duration = System.currentTimeMillis() - startTime;
-        log.info("uri:{}, duration: {}", uri, duration);
+        log.info("uri:{}, duration: {}", uri, duration / 100);
         return null;
     }
 }
