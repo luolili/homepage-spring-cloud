@@ -1,44 +1,44 @@
-spring:
-  application:
-    name: homepage-eureka
-  profiles: localhost
-server:
-  port: 8000
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: false
-  client:
-    service-url:
-      defaultZone: http://localhost02:8001/eureka/,http://localhost03:8002/eureka/
-
----
-spring:
-  application:
-    name: homepage-eureka
-  profiles: localhost02
-server:
-  port: 8001
-eureka:
-  instance:
-    hostname: localhost02
-    prefer-ip-address: false
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/,http://localhost03:8002/eureka/
-
----
-spring:
-  application:
-    name: homepage-eureka
-  profiles: localhost03
-server:
-  port: 8002
-eureka:
-  instance:
-    hostname: localhost03
-    prefer-ip-address: false
-  client:
-    service-url:
-      defaultZone: http://localhost:8000/eureka/,http://localhost02:8001/eureka/
-
+#spring:
+#  application:
+#    name: homepage-eureka
+#  profiles: localhost
+#server:
+#  port: 8000
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://localhost02:8001/eureka/,http://localhost03:8002/eureka/
+#
+#---
+#spring:
+#  application:
+#    name: homepage-eureka
+#  profiles: localhost02
+#server:
+#  port: 8001
+#eureka:
+#  instance:
+#    hostname: localhost02
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8000/eureka/,http://localhost03:8002/eureka/
+#
+#---
+#spring:
+#  application:
+#    name: homepage-eureka
+#  profiles: localhost03
+#server:
+#  port: 8002
+#eureka:
+#  instance:
+#    hostname: localhost03
+#    prefer-ip-address: false
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8000/eureka/,http://localhost02:8001/eureka/
+#
