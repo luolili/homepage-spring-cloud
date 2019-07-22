@@ -3,13 +3,17 @@ package homepage.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <h1>在过滤器里存储发起请求的时间</h1>
  */
 @Component
+@Slf4j
 public class AccessLogFilter extends ZuulFilter {
 
     @Override
@@ -31,8 +35,13 @@ public class AccessLogFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         //RequestContext传递请求
         RequestContext ctx = RequestContext.getCurrentContext();
-        ctx.set("startTime", System.currentTimeMillis());
+        Long startTime = (Long) ctx.get("startTime");
+        HttpServletRequest request = ctx.getRequest();
+        String uri = request.getRequestURI();
 
+
+        long duration = System.currentTimeMillis() - startTime;
+        log.info("uri:{}, duration: {}", uri, duration);
         return null;
     }
 }
