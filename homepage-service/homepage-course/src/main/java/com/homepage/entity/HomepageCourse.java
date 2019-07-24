@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)//填充创建时间
-@Table(name = "course")
+@Table(name = "homepage_course")
 public class HomepageCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
