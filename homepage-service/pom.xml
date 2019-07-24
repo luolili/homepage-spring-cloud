@@ -16,6 +16,7 @@
     <modules>
         <module>homepage-common</module>
         <module>homepage-course</module>
+        <module>homepage-user</module>
     </modules>
 
 
