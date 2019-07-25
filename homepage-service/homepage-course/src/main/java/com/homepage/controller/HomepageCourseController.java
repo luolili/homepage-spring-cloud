@@ -20,6 +20,12 @@ public class HomepageCourseController {
     @Autowired
     private ICourseService courseService;
 
+    /**
+     * http://localhost:9000/hp/homepage-course/get/course?id=1
+     *
+     * @param id id
+     * @return CourseInfo
+     */
     @GetMapping("/get/course")
     public CourseInfo getCourseInfo(Long id) {
         log.info("course id:{}", id);

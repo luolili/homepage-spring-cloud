@@ -24,6 +24,12 @@ public class UserController {
         return userService.add(request);
     }
 
+    /**
+     * http://localhost:9000/hp/homepage-user/user/get?id=3
+     *
+     * @param id id
+     * @return UserInfo
+     */
     @GetMapping("/user/get")
     public UserInfo getUserInfo(Long id) {
         log.info("user id: {}", JSON.toJSONString(id));

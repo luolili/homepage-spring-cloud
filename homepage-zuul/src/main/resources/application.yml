@@ -14,3 +14,18 @@ eureka:
     service-url:
       defaultZone: http://localhost:8000/eureka
 
+
+zuul:
+  prefix: /hp #网关的前缀
+  routes:
+    course:
+      path: /homepage-course/**
+      serviceId: eureka-client-homepage-course
+      strip_prefix: false #加上前缀/hp
+    user:
+      path: /homepage-user/**
+      serviceId: eureka-client-homepage-user
+      strip_prefix: false #加上前缀/hp
+
+
+
