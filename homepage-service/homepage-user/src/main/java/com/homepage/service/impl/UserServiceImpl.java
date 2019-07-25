@@ -87,6 +87,6 @@ public class UserServiceImpl implements IUserService {
         );
 
         return new UserCourseInfo(userInfo, courseInfos);
-        ;
+
     }
 }

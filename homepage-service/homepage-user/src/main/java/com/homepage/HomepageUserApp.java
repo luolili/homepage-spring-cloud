@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableFeignClients
 @EnableCircuitBreaker
 @EnableEurekaClient
-@SpringBootApplication
+//@SpringBootApplication
 public class HomepageUserApp {
     public static void main(String[] args) {
         SpringApplication.run(HomepageUserApp.class, args);
