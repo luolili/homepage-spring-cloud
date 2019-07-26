@@ -7,7 +7,6 @@
 
 4.一个模块不能同时又2个被@SpringBootApplication注解的类
 
-
 5.在查询多个对象的时候： @PostMapping
 
 #docker deploy and run the jar
