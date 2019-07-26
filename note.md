@@ -9,6 +9,9 @@
 
 5.在查询多个对象的时候： @PostMapping
 
+切换web server:如从tomcat切换到jetty: 需要排除tomcat,因为tomcat的
+加载优先于jetty.
+
 #docker deploy and run the jar
 1.在项目下面新建Dockerfile
 FROM openjdk:8-jdk-alpine
