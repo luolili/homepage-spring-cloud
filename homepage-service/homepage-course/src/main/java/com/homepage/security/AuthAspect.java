@@ -14,13 +14,18 @@ public class AuthAspect {
     @Autowired
     private AuthService authService;
 
+    /**
+     *
+     */
     //拦截有AdminOnly 注解的方法
-    @Pointcut("@annotation(AdminOnly)")
+    //@Pointcut("@annotation(AdminOnly)")
+    //匹配制定的类里面的所有的方法
+    @Pointcut("within(com.homepage.service.ProductService)")
     public void adminOnly() {
 
     }
 
-    @Before("adminOnly()")
+    @Before("adminOnly()")//在adminOnly方法执行之前check
     public void check() {
         authService.checkAccess();
     }
