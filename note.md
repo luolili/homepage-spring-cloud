@@ -11,7 +11,8 @@
 
 切换web server:如从tomcat切换到jetty: 需要排除tomcat,因为tomcat的
 加载优先于jetty.
-
+切换web mvc--> web flux :2者是不可以共存的，同时存在；同时存在
+的时候用web flux
 #docker deploy and run the jar
 1.在项目下面新建Dockerfile
 FROM openjdk:8-jdk-alpine
