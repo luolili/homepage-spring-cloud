@@ -15,12 +15,15 @@ public class AuthAspect {
     private AuthService authService;
 
     /**
-     *
+     *within()括号里面是类的全路径名
      */
     //拦截有AdminOnly 注解的方法
-    //@Pointcut("@annotation(AdminOnly)")
+    @Pointcut("@annotation(AdminOnly)")
     //匹配制定的类里面的所有的方法
-    @Pointcut("within(com.homepage.service.ProductService)")
+    //@Pointcut("within(com.homepage.service.ProductService)")
+
+    //匹配com.homepage包以及其子包下面的所有类的方法
+    //@Pointcut("within(com.homepage.*)")
     public void adminOnly() {
 
     }

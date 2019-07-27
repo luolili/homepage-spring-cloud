@@ -3,6 +3,7 @@ package com.homepage.controller;
 import com.alibaba.fastjson.JSON;
 import com.homepage.CourseInfosRequest;
 import com.homepage.entity.Product;
+import com.homepage.log.Logger;
 import com.homepage.security.CurrentUserHolder;
 import com.homepage.service.AuthService;
 import com.homepage.service.ProductService;
@@ -89,11 +90,16 @@ public class HomepageCourseControllerTest {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private Logger logger;
+
     //@Test(expected = Exception.class)
     @Test
     public void testAuth01() {
         CurrentUserHolder.setUser("admin");
         productService.insert(new Product());
+        logger.log();
+        productService.delete(1L);
     }
 
     //当方法抛出Exception的时候，success
