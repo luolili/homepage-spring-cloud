@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 public class HttpAspect {
-
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
     /**
@@ -25,7 +24,6 @@ public class HttpAspect {
     //拦截所有的方法
     //@Before("execution(public * com.homepage.controller.HomepageCourseController.*(..))")
     public void log() {
-
         System.out.println("-before-");
 
     }*/
@@ -65,7 +63,6 @@ public class HttpAspect {
     //拦截所有的方法
     //@Before("execution(public * com.homepage.controller.HomepageCourseController.*(..))")
     public void after() {
-
         System.out.println("-after-");
 
     }

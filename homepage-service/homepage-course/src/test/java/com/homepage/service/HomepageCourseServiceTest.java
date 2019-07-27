@@ -17,7 +17,7 @@ import java.util.Arrays;
  * 服务的test case
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {App.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@SpringBootTest(classes = {App.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class HomepageCourseServiceTest {
 
 
