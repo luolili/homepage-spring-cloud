@@ -1,12 +1,15 @@
 package com.homepage.aspect;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.ServletRequestAttributeListener;
+import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
@@ -37,9 +40,25 @@ public class HttpAspect {
 
     //2019-07-27 13:26:36.409  INFO 8576 --- [nio-7001-exec-1] com.homepage.aspect.HttpAspect   : beifre
     @Before("log01()")
-    public void doBefore() {
+    public void doBefore(JoinPoint joinPoint) {
         //System.out.println("ii");
         logger.info("beifre");
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        //url
+        StringBuffer requestURL = request.getRequestURL();
+        logger.info("url: {}", requestURL);
+        //method
+        logger.info("method: {}", request.getMethod());
+        //ip
+        logger.info("remote ip: {}", request.getRemoteAddr());
+        //
+        logger.info("class method: {}", joinPoint.getSignature().getDeclaringTypeName());
+        //参数
+        logger.info("  method args: {}", joinPoint.getArgs());
+
+
+
     }
 
     @After("execution(public * com.homepage.controller.HomepageCourseController.getCourseInfo(..))")
@@ -49,5 +68,11 @@ public class HttpAspect {
 
         System.out.println("-after-");
 
+    }
+
+    //获取方法的返回值
+    @AfterReturning(pointcut = "log01()", returning = "obj")
+    public void doAfterReturning(Object obj) {
+        logger.info("returned value: {}", obj);
     }
 }
