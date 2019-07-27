@@ -2,6 +2,10 @@ package com.homepage.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.homepage.CourseInfosRequest;
+import com.homepage.entity.Product;
+import com.homepage.security.CurrentUserHolder;
+import com.homepage.service.AuthService;
+import com.homepage.service.ProductService;
 import org.assertj.core.util.Arrays;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +80,26 @@ public class HomepageCourseControllerTest {
         String contentAsString = response.getContentAsString();
 
         System.out.println("post: " + contentAsString);
+    }
 
+    //------authServic test
+    @Autowired
+    private AuthService authService;//要加@Component
 
+    @Autowired
+    private ProductService productService;
+
+    //@Test(expected = Exception.class)
+    @Test
+    public void testAuth01() {
+        CurrentUserHolder.setUser("admin");
+        productService.insert(new Product());
+    }
+
+    //当方法抛出Exception的时候，success
+    @Test(expected = Exception.class)
+    public void testAuth02() {
+        CurrentUserHolder.setUser("d");
+        productService.insert(new Product());
     }
 }
