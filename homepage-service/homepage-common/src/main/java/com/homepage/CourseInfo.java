@@ -18,7 +18,6 @@ public class CourseInfo {
 
     public static CourseInfo invalid() {
 
-
         return new CourseInfo(-1L, "", "", "", "");
     }
 }

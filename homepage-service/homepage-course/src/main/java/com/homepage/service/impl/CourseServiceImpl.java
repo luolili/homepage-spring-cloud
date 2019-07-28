@@ -25,14 +25,18 @@ public class CourseServiceImpl implements ICourseService {
     @Autowired
     public CourseServiceImpl(HomepageCourseRepo homepageCourseRepo) {
         this.homepageCourseRepo = homepageCourseRepo;
+    }
 
+    @Override
+    public CourseInfo add(CourseInfo courseInfo) {
+        return homepageCourseRepo.save(courseInfo);
     }
 
     @Override
     public CourseInfo getCourseInfo(Long id) {
         Optional<HomepageCourse> course = homepageCourseRepo.findById(id);
 
-        return build(course.orElse(HomepageCourse.invalid()));
+        return buildCourseInfo(course.orElse(HomepageCourse.invalid()));
     }
 
     @Override
@@ -42,12 +46,12 @@ public class CourseServiceImpl implements ICourseService {
         }
         List<HomepageCourse> courses = homepageCourseRepo.findAllById(request.getIds());
         return courses.stream()
-                .map(this::build)
+                .map(this::buildCourseInfo)
                 .collect(Collectors.toList());
 
     }
 
-    private CourseInfo build(HomepageCourse homepageCourse) {
+    private CourseInfo buildCourseInfo(HomepageCourse homepageCourse) {
         return CourseInfo.builder()
                 .id(homepageCourse.getId())
                 .courseName(homepageCourse.getCourseName())
@@ -56,4 +60,6 @@ public class CourseServiceImpl implements ICourseService {
                 .courseIntro(homepageCourse.getCourseIntro())
                 .build();
     }
+
+    
 }

@@ -23,7 +23,7 @@ public class HomepageCourse {
     private Long id;
 
     @Basic
-    @Column(name = "course_name", nullable = false)
+    @Column(name = "course_name", nullable = false, unique = true)
     private String courseName;
 
     @Basic
