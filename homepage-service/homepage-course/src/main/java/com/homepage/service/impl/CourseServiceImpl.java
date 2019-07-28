@@ -27,10 +27,11 @@ public class CourseServiceImpl implements ICourseService {
         this.homepageCourseRepo = homepageCourseRepo;
     }
 
-    @Override
-    public CourseInfo add(CourseInfo courseInfo) {
-        return homepageCourseRepo.save(courseInfo);
-    }
+
+//    @Override
+//    public CourseInfo add(CourseInfo courseInfo) {
+//        return homepageCourseRepo.save(courseInfo);
+//    }
 
     @Override
     public CourseInfo getCourseInfo(Long id) {
