@@ -14,6 +14,17 @@ public class JdkSubject implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return null;
+        System.out.println("before something");
+        Object result = null;
+        try {
+            result = method.invoke(subjectImpl, args);
+        } catch (Exception e) {
+            System.out.println("ex: " + e.getMessage());
+        } finally {
+            System.out.println("after something");
+        }
+
+        return result;
     }
+
 }

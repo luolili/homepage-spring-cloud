@@ -5,4 +5,9 @@ public class SubjectImpl implements Subject {
     public void request() {
         System.out.println("real subject  exec request");
     }
+
+    @Override
+    public void helo() {
+        System.out.println("helo--");
+    }
 }

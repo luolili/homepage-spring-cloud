@@ -21,4 +21,16 @@ public class Proxy implements Subject {
             System.out.println("after something");
         }
     }
+
+    @Override
+    public void helo() {
+        System.out.println("before something");
+        try {
+            subjectImpl.helo();
+        } catch (Exception e) {
+            System.out.println("ex: " + e.getMessage());
+        } finally {
+            System.out.println("after something");
+        }
+    }
 }
