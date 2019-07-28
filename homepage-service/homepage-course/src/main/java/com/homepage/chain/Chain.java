@@ -15,9 +15,11 @@ public class Chain {
     }
 
     public void proceed() {
+        //-1 检查index的范围
         if (this.index >= this.handlers.size()) {
             return;
         }
+        //遍历 的 调用handler实现的方法
         handlers.get(this.index++).execute(this);
 
 

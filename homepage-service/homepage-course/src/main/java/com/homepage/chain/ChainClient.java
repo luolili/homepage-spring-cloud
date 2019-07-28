@@ -29,10 +29,6 @@ public class ChainClient {
     }
 
     public static void main(String[] args) {
-        Client.HandlerA handlerA = new Client.HandlerA();
-        Client.HandlerB handlerB = new Client.HandlerB();
-        Client.HandlerC handlerC = new Client.HandlerC();
-
         List<ChainHandler> handlers = Arrays.asList(
                 new ChainHandlerA(),
                 new ChainHandlerB(),
