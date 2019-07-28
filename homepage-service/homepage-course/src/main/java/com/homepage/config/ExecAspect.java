@@ -11,7 +11,11 @@ public class ExecAspect {
 
 
     //public表示方法的修饰符， 第一个* 表示返回值，
-    @Pointcut("execution(public * com.homepage.service.*Service.*(..))")
+    //拦截要抛出这个异常的方法
+    @Pointcut("execution(public String com.homepage.service.*Service.*(..) throws java.lang.IllegalArgumentException)")
+    //@Pointcut("execution(public String com.homepage.service.*Service.*(..))")
+    // @Pointcut("execution(public void com.homepage.service.*Service.*(..))")
+    //@Pointcut("execution(public * com.homepage.service.*Service.*(..))")
     public void test() {
 
     }
