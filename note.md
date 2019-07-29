@@ -33,4 +33,11 @@ ENTRYPOINT ["java","-jar","/hp.jar"] ： 要执行的jar文件
 如果配置文件指定了server.port ,:后面就是指定的port
   
    
---------test revert
+#如何用idea进行版本回退？
+
+1. 右击项目--> Git-->Show hisotry-->选中之前的某一个版本（你要回到
+的版本）--> Copy reversion Number
+2. 右击项目-->Git-->Repository--Branches-->choose Checkout for tag
+or Reversion--paste-->ok
+3. 此时你所处的分支名字叫你复制的那个字符串
+checkout 到master分支-->smart choukout-->merge
