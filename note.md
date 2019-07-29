@@ -41,3 +41,4 @@ ENTRYPOINT ["java","-jar","/hp.jar"] ： 要执行的jar文件
 or Reversion--paste-->ok
 3. 此时你所处的分支名字叫你复制的那个字符串
 checkout 到master分支-->smart choukout-->merge
+#如何部署springboot项目到华为云
