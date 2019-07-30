@@ -42,3 +42,6 @@ or Reversion--paste-->ok
 3. 此时你所处的分支名字叫你复制的那个字符串
 checkout 到master分支-->smart choukout-->merge
 #如何部署springboot项目到华为云
+1. 登陆华为云，点击右上角的控制台
+2. 配置弹性云服务器ip
+3. 用软件登陆云服务器， 用XShell下载如docker等软件
