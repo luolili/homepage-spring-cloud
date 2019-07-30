@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -26,12 +27,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    /**
+     * bug: There is no PasswordEncoder mapped for the id "null"
+     * Encoded password does not look like BCrypt
+     *
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("/demo")
-                .password("demo")
-                .roles("USER")
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .withUser("demo").password("demo").roles("USER")
                 .and()
                 .withUser("admin").password("admin").roles("ADMIN");
 
