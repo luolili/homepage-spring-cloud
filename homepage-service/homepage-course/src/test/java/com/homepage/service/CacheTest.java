@@ -14,6 +14,13 @@ public class CacheTest {
     @Autowired
     private CacheMenuService cacheMenuService;
 
+    /**
+     * result:
+     * mock: get from db
+     * call: [xc, rf, tg]
+     * 第二次调用
+     * call: [xc, rf, tg]
+     */
     @Test
     public void testMenuCache() {
         System.out.println("call: " + cacheMenuService.getMenuList());
