@@ -32,7 +32,12 @@ ENTRYPOINT ["java","-jar","/hp.jar"] ： 要执行的jar文件
 4. docker run -d -p 8002:8000 myorg/hp
 如果配置文件指定了server.port ,:后面就是指定的port
   
-   
+ #微信的消息模板
+   先用服务号的账号和密码登陆，让管理员扫码；
+   添加新的消息模板;
+   获得消息模板id，id用AES加密
+   把加密的模板id配置到MessageType里面
+ #mongodb使用？
 #如何用idea进行版本回退？
 
 1. 右击项目--> Git-->Show hisotry-->选中之前的某一个版本（你要回到
