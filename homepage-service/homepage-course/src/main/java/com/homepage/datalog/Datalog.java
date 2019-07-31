@@ -1,4 +1,4 @@
-package com.homepage.entity;
+package com.homepage.datalog;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

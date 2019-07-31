@@ -1,4 +1,4 @@
-package com.homepage.aspect;
+package com.homepage.datalog;
 
 import com.netflix.appinfo.InstanceInfo;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -57,6 +57,7 @@ public class DatalogAspect {
 
         }
 
+        return null;
 
     }
 

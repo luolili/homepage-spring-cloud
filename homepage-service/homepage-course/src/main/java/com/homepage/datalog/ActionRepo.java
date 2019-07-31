@@ -1,4 +1,4 @@
-package com.homepage.dao;
+package com.homepage.datalog;
 
 import com.homepage.entity.Action;
 import org.springframework.data.mongodb.repository.MongoRepository;

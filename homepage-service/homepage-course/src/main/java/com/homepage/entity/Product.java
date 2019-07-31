@@ -1,5 +1,6 @@
 package com.homepage.entity;
 
+import com.homepage.datalog.Datalog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
