@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,5 +76,25 @@ public class DiffUtils {
     }
 
 
+    //判断一个类是否为基本数据类型或包装类，或日期。
+    public static boolean isBaseDataType(Class clazz) {
+        return (
+                clazz.equals(String.class) ||
+                        clazz.equals(Integer.class) ||
+                        clazz.equals(Long.class) ||
+                        clazz.equals(Float.class) ||
+                        clazz.equals(Double.class) ||
+                        clazz.equals(Short.class) ||
+                        clazz.equals(Byte.class) ||
+                        clazz.equals(Character.class) ||
+                        clazz.equals(Boolean.class) ||
+                        clazz.equals(BigInteger.class) ||
+                        clazz.equals(BigDecimal.class) ||
+                        clazz.equals(Date.class) ||
+                        clazz.isPrimitive()
+
+
+        );
+    }
 
 }
