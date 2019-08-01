@@ -37,6 +37,18 @@ public class DiffUtils {
         return null;
     }
 
+    public static String getValue(Object o) {
+        if (o != null) {
+            if (o instanceof Date) {
+                return formatDate((Date) o);
+            } else {
+                return o.toString();
+            }
+        }
+        return "";
+    }
+
+    //从注解读取中文名：filed name--ann name
     public static Map<String, String> getFieldNameMap(Class<?> cls) {
         Map<String, String> map = new HashMap<>();
         for (Field field : cls.getDeclaredFields()) {
@@ -72,7 +84,7 @@ public class DiffUtils {
 
         Class<?> clazz = bean.getClass();
         try {
-            //不获取父类的i段
+            //不获取父类的字段
             Field[] fields = clazz.getDeclaredFields();
             for (int i = 0; i < fields.length; i++) {
                 Class<?> fieldType = fields[i].getType();
@@ -85,7 +97,7 @@ public class DiffUtils {
                 }
                 if (isBaseDataType(fieldType)) {
                     String stringValue = getFieldStringValue(fieldType, value);
-                    map.put(name, stringValue);
+                    map.put(name, stringValue);//field name--field val
                 }
 
             }
