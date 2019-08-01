@@ -1,5 +1,6 @@
 package com.homepage.util;
 
+import com.homepage.datalog.Datalog;
 import com.homepage.entity.ChangeItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,17 @@ public class DiffUtils {
         return null;
     }
 
+    public static Map<String, String> getFieldNameMap(Class<?> cls) {
+        Map<String, String> map = new HashMap<>();
+        for (Field field : cls.getDeclaredFields()) {
+
+            if (field.isAnnotationPresent(Datalog.class)) {
+                Datalog annotation = field.getAnnotation(Datalog.class);
+                map.put(field.getName(), annotation.name());
+            }
+        }
+        return map;
+    }
     public static String formatDate(Date date) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd 'T' HH:mm:ss");
         String text = df.format(date);
