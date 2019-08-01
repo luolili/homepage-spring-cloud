@@ -2,9 +2,14 @@ package com.homepage.util;
 
 import com.homepage.datalog.Datalog;
 import com.homepage.entity.ChangeItem;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,10 +17,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DiffUtils {
     //log
@@ -37,6 +39,41 @@ public class DiffUtils {
         return null;
     }
 
+    public static List<ChangeItem> getChangeITems(Object oldObj, Object newObj) {
+        Class<?> c1 = oldObj.getClass();
+        List<ChangeItem> changeItems = new ArrayList<>();
+        //获取字段中文名称
+        Map<String, String> fieldNameMap = getFieldNameMap(c1);
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(c1, Object.class);
+            for (PropertyDescriptor propertyDescriptor : beanInfo.getPropertyDescriptors()) {
+
+                //字段名称
+                String field = propertyDescriptor.getName();
+
+                //获取字段的旧val
+                String oldPro = getValue(PropertyUtils.getProperty(oldObj, field));
+                String newPro = getValue(PropertyUtils.getProperty(newObj, field));
+                //对比
+                if (!oldPro.equals(newPro)) {
+                    ChangeItem changeItem = new ChangeItem();
+                    changeItem.setField(field);
+                    String cnName = fieldNameMap.get(field);
+                    changeItem.setFieldShowName(StringUtils.isEmpty(cnName) ? field : cnName);
+                    changeItem.setNewValue(newPro);
+                    changeItem.setOldValue(oldPro);
+                    changeItems.add(changeItem);
+
+                }
+
+            }
+
+        } catch (Exception e) {
+            logger.error("There is error when convert change item", e);
+        }
+        return changeItems;
+
+    }
     public static String getValue(Object o) {
         if (o != null) {
             if (o instanceof Date) {

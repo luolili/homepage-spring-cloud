@@ -10,4 +10,10 @@ public class ChangeItem {
 
     private String oldValue;
     private String newValue;
+
+    private String fieldShowName;
+
+    public void setFieldShowName(String fieldShowName) {
+        this.fieldShowName = fieldShowName;
+    }
 }
