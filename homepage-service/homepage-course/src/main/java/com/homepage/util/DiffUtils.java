@@ -9,6 +9,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,19 +36,24 @@ public class DiffUtils {
         return null;
     }
 
+    public static String formatDate(Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd 'T' HH:mm:ss");
+        String text = df.format(date);
+        String res = text.substring(0, 22) + ":" + text.substring(22);
+
+        return res;
+
+    }
 
     /**
      * 获取bean 的filed name and value
      *
      * @param bean       bean
      * @param filterNull
-     * @return
+     * @return map
      */
     public static Map<String, String> getBeanSimpleFieldValueMap(Object bean, boolean filterNull) {
-
-
         Map<String, String> map = new HashMap<>();
-
         if (bean == null) {
             return map;
         }
@@ -56,7 +63,6 @@ public class DiffUtils {
             //不获取父类的i段
             Field[] fields = clazz.getDeclaredFields();
             for (int i = 0; i < fields.length; i++) {
-
                 Class<?> fieldType = fields[i].getType();
                 String name = fields[i].getName();
                 Method method = clazz.getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
@@ -65,17 +71,26 @@ public class DiffUtils {
                 if (filterNull && value == null) {
                     continue;
                 }
-
+                if (isBaseDataType(fieldType)) {
+                    String stringValue = getFieldStringValue(fieldType, value);
+                    map.put(name, stringValue);
+                }
 
             }
         } catch (Exception e) {
-
+            logger.error(e.getMessage(), e);
         }
-
+        return map;
 
     }
 
-
+    public static String getFieldStringValue(Class type, Object value) {
+        if (type == Date.class) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return format.format((Date) value);
+        }
+        return value.toString();
+    }
     //判断一个类是否为基本数据类型或包装类，或日期。
     public static boolean isBaseDataType(Class clazz) {
         return (
