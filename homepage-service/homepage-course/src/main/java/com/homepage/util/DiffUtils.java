@@ -1,5 +1,6 @@
 package com.homepage.util;
 
+import com.alibaba.fastjson.JSON;
 import com.homepage.datalog.Datalog;
 import com.homepage.entity.ChangeItem;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -35,10 +36,35 @@ public class DiffUtils {
 
     public static List<ChangeItem> getInsertChangeItems(Object obj) {
 
+        Map<String, String> valueMap = getBeanSimpleFieldValueMap(obj, true/*filter null*/);
+        Map<String, String> fieldNameMap = getFieldNameMap(obj.getClass());
+
+        ArrayList<ChangeItem> items = new ArrayList<>();
+        for (Map.Entry<String, String> entry : fieldNameMap.entrySet()) {
+            String fieldName = entry.getKey();
+
+            String fieldValue = entry.getValue();
+            ChangeItem changeItem = new ChangeItem();
+            changeItem.setOldValue("");
+            changeItem.setNewValue(fieldValue);
+            changeItem.setField(fieldName);
+            String cnNName = fieldNameMap.get(fieldName);
+            changeItem.setFieldShowName(StringUtils.isEmpty(cnNName) ? fieldName : cnNName);
+            items.add(changeItem);
+
+        }
+        return items;
 
         return null;
     }
 
+    public static ChangeItem getDeleteChangeItem(Object o) {
+        ChangeItem changeItem = new ChangeItem();
+        changeItem.setOldValue(JSON.toJSONString(o));
+        changeItem.setNewValue("");
+        return changeItem;
+
+    }
     public static List<ChangeItem> getChangeITems(Object oldObj, Object newObj) {
         Class<?> c1 = oldObj.getClass();
         List<ChangeItem> changeItems = new ArrayList<>();
