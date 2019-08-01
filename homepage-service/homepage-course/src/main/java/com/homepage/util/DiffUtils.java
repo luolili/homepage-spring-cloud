@@ -55,7 +55,6 @@ public class DiffUtils {
         }
         return items;
 
-        return null;
     }
 
     public static ChangeItem getDeleteChangeItem(Object o) {
