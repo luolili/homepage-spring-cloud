@@ -37,6 +37,10 @@ ENTRYPOINT ["java","-jar","/hp.jar"] ： 要执行的jar文件
    添加新的消息模板;
    获得消息模板id，id用AES加密
    把加密的模板id配置到MessageType里面
+  
+  #微服务
+  1. 轻量级的通信：不同语言写的模块可以通信
+  2. 围绕业务建模
  #mongodb使用？
 #如何用idea进行版本回退？
 

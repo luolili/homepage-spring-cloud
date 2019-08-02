@@ -2,11 +2,11 @@ package com.homepage.entity;
 
 import lombok.Data;
 
-@Data
+//@Data
 public enum ActionType {
     ADD("添加", 1),
-    update("更新", 2),
-    delete("删除", 3),
+    UPDATE("更新", 2),
+    DELETE("删除", 3),
     ;
 
 
