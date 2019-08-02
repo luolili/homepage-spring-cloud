@@ -35,14 +35,12 @@ public class DiffUtils {
     }
 
     public static List<ChangeItem> getInsertChangeItems(Object obj) {
-
         Map<String, String> valueMap = getBeanSimpleFieldValueMap(obj, true/*filter null*/);
         Map<String, String> fieldNameMap = getFieldNameMap(obj.getClass());
 
         ArrayList<ChangeItem> items = new ArrayList<>();
         for (Map.Entry<String, String> entry : fieldNameMap.entrySet()) {
             String fieldName = entry.getKey();
-
             String fieldValue = entry.getValue();
             ChangeItem changeItem = new ChangeItem();
             changeItem.setOldValue("");

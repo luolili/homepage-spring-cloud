@@ -27,4 +27,12 @@ public class CacheTest {
         System.out.println("call: " + cacheMenuService.getMenuList());
 
     }
+
+    //
+    @Test
+    public void testInnerCall() {
+        System.out.println("call: " + cacheMenuService.getComments());
+        System.out.println("call: " + cacheMenuService.getComments());
+
+    }
 }

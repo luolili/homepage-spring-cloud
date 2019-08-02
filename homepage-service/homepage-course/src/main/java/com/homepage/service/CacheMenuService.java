@@ -1,5 +1,6 @@
 package com.homepage.service;
 
+import com.homepage.util.ApplicationContextHolder;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -16,4 +17,15 @@ public class CacheMenuService {
         System.out.println("mock: get from db");
         return Arrays.asList("xc", "rf", "tg");
     }
+
+    //没有代理CacheMenuService
+    public List<String> getComments() {
+        //内部调用
+        //解决方法
+        CacheMenuService proxy = ApplicationContextHolder.getCtx().getBean(CacheMenuService.class);
+
+        return proxy.getMenuList();
+        //return this.getMenuList();
+    }
+
 }

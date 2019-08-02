@@ -11,6 +11,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 非功能性业务
+ * 无法拦截static方法， final方法，private 方法
+ * 无法拦截内部方法调用
+ */
 @Aspect
 @Component
 public class HttpAspect {
@@ -54,7 +59,6 @@ public class HttpAspect {
         logger.info("class method: {}", joinPoint.getSignature().getDeclaringTypeName());
         //参数
         logger.info("  method args: {}", joinPoint.getArgs());
-
 
 
     }
