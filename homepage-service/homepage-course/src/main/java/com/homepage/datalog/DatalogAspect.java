@@ -24,9 +24,9 @@ public class DatalogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(DatalogAspect.class);
 
-    @Autowired
+    /*@Autowired
     private ActionRepo actionRepo;
-
+*/
     //保存和更新操作
     @Pointcut("execution(public * com.homepage.dao.*.save*(..))")
     public void save() {
@@ -94,7 +94,7 @@ public class DatalogAspect {
         }
         action.setOpertor("admin");
         action.setOperateTime(new Date());
-        actionRepo.save(action);
+        //actionRepo.save(action);
 
 
         return null;
