@@ -7,11 +7,10 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
-import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
-import io.netty.handler.codec.http.websocketx.WebSocketFrame;
-import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
-import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
+
+import java.util.Date;
 
 public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
 
@@ -57,10 +56,38 @@ public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
             handleHttpRequest(ctx, (FullHttpRequest) msg);
         } else if (msg instanceof WebSocketFrame) {//web  socket请求
             //-2 建立连接
+            handleWsFrame(ctx, (WebSocketFrame) msg);
         }
 
     }
 
+    private void handleWsFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+
+        if (frame instanceof CloseWebSocketFrame) {
+            handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
+        }
+        //是否是ping消息
+        if (frame instanceof PingWebSocketFrame) {
+            ctx.channel().write(new PongWebSocketFrame(frame.content().retain()));
+        }
+
+        //2机制消息
+        if (!(frame instanceof TextWebSocketFrame)) {
+            System.out.println("not support 2 msg");
+            throw new RuntimeException(this.getClass().getName() + "not support");
+        }
+
+        //获取客户端发送那个的消息
+        String text = ((TextWebSocketFrame) frame).text();
+        System.out.println("server receives  the msg" + text);
+        TextWebSocketFrame tws = new TextWebSocketFrame(new Date().toString() +
+                ctx.channel().id() + "----->" + text);
+
+        //server 群发
+        NettyConfig.group.writeAndFlush(tws);
+
+
+    }
     //处理http握手请求
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
         if (!req.getDecoderResult().isSuccess() || !("".equals(req.headers().get("Upgrade")))) {
