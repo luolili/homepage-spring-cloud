@@ -62,7 +62,6 @@ public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
     }
 
     private void handleWsFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
-
         if (frame instanceof CloseWebSocketFrame) {
             handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
         }
