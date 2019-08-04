@@ -3,12 +3,11 @@ package com.im.packet.data;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cache.annotation.EnableCaching;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginRequestData implements EncodedData {
+public class LoginRequestData implements EncodeData {
 
     private String userId;
 

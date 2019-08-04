@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 封装常量和方法
  */
-public class IMUtil {
+public class Utils {
 
     //登陆的code
     public static final Integer LOGIN_SUCCESS = 1000;

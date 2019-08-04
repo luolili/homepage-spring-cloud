@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponseData implements EncodedData {
+public class LoginResponseData implements EncodeData {
 
     private Boolean isSuccessful;
     private Integer code;

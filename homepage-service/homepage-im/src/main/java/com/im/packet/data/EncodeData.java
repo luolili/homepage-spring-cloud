@@ -1,5 +1,5 @@
 package com.im.packet.data;
 
-public interface EncodedData {
+public interface EncodeData {
     byte getCommand();
 }

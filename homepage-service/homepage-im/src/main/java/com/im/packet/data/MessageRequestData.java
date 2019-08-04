@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageRequestData implements EncodedData {
+public class MessageRequestData implements EncodeData {
 
     private String toUser;
 
