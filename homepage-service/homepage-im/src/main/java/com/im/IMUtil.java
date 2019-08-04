@@ -15,8 +15,8 @@ public class IMUtil {
 
     //登陆的code
     public static final Integer LOGIN_SUCCESS = 1000;
-    public static final AttributeKey<Boolean> LOGIN_STATUS = AttributeKey.valueOf("LOGIN");
-    public static final AttributeKey<Session> SESSION = AttributeKey.valueOf("SESSION");
+    public static final AttributeKey<Boolean> LOGIN_STATUS = AttributeKey.newInstance("LOGIN");
+    public static final AttributeKey<Session> SESSION = AttributeKey.newInstance("SESSION");
     private static final Map<String, Channel> userIdChannelMap = new ConcurrentHashMap<>();
 
     public static void markLogin(Channel channel) {
@@ -32,6 +32,7 @@ public class IMUtil {
 
     public static void bindSession(Session session, Channel channel) {
         userIdChannelMap.put(session.getUserId(), channel);
+        channel.attr(SESSION).set(session);
     }
 
     public static void unbindSession(Channel channel) {
