@@ -1,0 +1,63 @@
+<html>
+
+<header>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    ws客户端
+    <script type="text/javascript">
+
+        var socket;
+        if (!window.WebSocket) {
+            window.WebSocket = window.MozWebSocket;
+
+        }
+
+        if (window.WebSocket) {
+            socket = new WebSocket("ws://localhost:8888/websocket");
+            socket.onmessage = function (e) {
+                var ta = document.getElementById("respCtx");
+                ta.value += e.data + "\r\n";
+            };
+
+            socket.onopen = function (e) {
+                var ta = document.getElementById("respCtx");
+                ta.value = "support "
+            };
+
+            socket.onclose = function (e) {
+                var ta = document.getElementById("respCtx");
+                ta.value = " ";
+                ta.value = "ws close ";
+            };
+        } else {
+            alert("--not support");
+        }
+
+        function send(message) {
+            if (!window.WebSocket) {
+                return;
+            }
+
+            if (socket.readyState == WebSocket.OPEN) {
+                socket.send(message);
+            } else {
+                alert(" no conn");
+            }
+        }
+    </script>
+</header>
+
+
+<body>
+<form onsubmit="return false;">
+    <input type="text" name="message" value=""/>
+    <br/>
+    <input type="button" value="send消息"
+           onclick="send(this.form.message.value)"/>
+    <hr color="red"/>
+
+    <h2>response</h2>
+
+    <textarea id="respCtx" style="width: 1200px;height:200px"></textarea>
+</form>
+</body>
+</html>
