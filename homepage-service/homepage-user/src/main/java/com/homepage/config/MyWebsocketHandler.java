@@ -1,11 +1,17 @@
 package com.homepage.config;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.util.CharsetUtil;
 
 public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
 
@@ -48,16 +54,45 @@ public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
         //-1 客户端发起请求
         //http握手请求
         if (msg instanceof FullHttpRequest) {
-
+            handleHttpRequest(ctx, (FullHttpRequest) msg);
         } else if (msg instanceof WebSocketFrame) {//web  socket请求
             //-2 建立连接
         }
 
     }
 
+    //处理http握手请求
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
         if (!req.getDecoderResult().isSuccess() || !("".equals(req.headers().get("Upgrade")))) {
-
+            sendHttpResponse(ctx, req,
+                    new DefaultFullHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.BAD_REQUEST));
+            return;
         }
+
+        WebSocketServerHandshakerFactory wsFactory =
+                new WebSocketServerHandshakerFactory(WEB_SOCKET_URL, null, false);
+        handshaker = wsFactory.newHandshaker(req);
+        if (handshaker == null) {
+            WebSocketServerHandshakerFactory.sendUnsupportedWebSocketVersionResponse(ctx.channel());
+        } else {
+            handshaker.handshake(ctx.channel(), req);
+        }
+    }
+
+    //服务端向客户端响应消息
+    private void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req,
+                                  DefaultFullHttpResponse resp) {
+
+        if (resp.getStatus().code() != 200) {
+            ByteBuf byteBuf = Unpooled.copiedBuffer(resp.getStatus().toString(), CharsetUtil.UTF_8);
+            resp.content().writeBytes(byteBuf);
+            byteBuf.release();
+        }
+        //server 向client发送数据
+        ChannelFuture f = ctx.channel().writeAndFlush(resp);
+        if (resp.getStatus().code() != 200) {
+            f.addListener(ChannelFutureListener.CLOSE);
+        }
+
     }
 }
