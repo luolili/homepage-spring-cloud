@@ -32,6 +32,16 @@ ENTRYPOINT ["java","-jar","/hp.jar"] ： 要执行的jar文件
 4. docker run -d -p 8002:8000 myorg/hp
 如果配置文件指定了server.port ,:后面就是指定的port
   
+5. 提交时：
+Fatal: HttpRequestException encountered. 
+unable to access 
+'https://github.com/luolili/homepage-spring-cloud.git/': 
+Operation timed out 
+after 300000 milliseconds with 0 out of 0 bytes receive
+
+到
+https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/tag/v1.14.0
+下载 GCMW-1.14.0.exe即可
  #微信的消息模板
    先用服务号的账号和密码登陆，让管理员扫码；
    添加新的消息模板;
