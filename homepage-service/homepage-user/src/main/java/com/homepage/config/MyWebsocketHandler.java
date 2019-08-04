@@ -2,9 +2,15 @@ package com.homepage.config;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.websocketx.WebSocketClientHandshaker;
+import io.netty.handler.codec.http.websocketx.WebSocketFrame;
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 
 public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
 
+    private WebSocketServerHandshaker handshaker;
+    private static final String WEB_SOCKET_URL = "ws://localhost:8888/websocket";
     //客户端与服务端创建连接的时候调用
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -39,6 +45,10 @@ public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
     //5.0.x的netty才有这个方法：处理来自客户端websocket请求的核心方法
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
+        //-1 客户端发起请求
+        if (msg instanceof FullHttpRequest) {
 
-    }
+        } else if (msg instanceof WebSocketFrame) {
+            //-2 建立连接
+        }
 }
