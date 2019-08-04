@@ -1,4 +1,4 @@
-package com.homepage.config;
+package com.homepage.netty00;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;

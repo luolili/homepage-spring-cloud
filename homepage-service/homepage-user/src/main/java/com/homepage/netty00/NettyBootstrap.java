@@ -1,4 +1,4 @@
-package com.homepage.config;
+package com.homepage.netty00;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;

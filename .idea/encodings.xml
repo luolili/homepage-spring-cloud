@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/homepage-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/homepage-service/homepage-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/homepage-service/homepage-course" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/homepage-service/homepage-im" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/homepage-service/homepage-user" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/homepage-zuul" charset="UTF-8" />
   </component>

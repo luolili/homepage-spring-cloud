@@ -1,4 +1,4 @@
-package com.homepage.config;
+package com.homepage.netty00;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class ArgAspect {
+public class ObjectAspect {
 
 
-    @Pointcut("args(Long) && within(com.homepage.service.*)")
+    @Pointcut("this(com.homepage.log.Logger)")
     public void test() {
 
     }
 
     @Before("test()")
     public void doBefore() {
-        System.out.println("arg ");
+        System.out.println("logger ");
     }
 }
