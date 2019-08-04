@@ -46,9 +46,18 @@ public class MyWebsocketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
         //-1 客户端发起请求
+        //http握手请求
         if (msg instanceof FullHttpRequest) {
 
-        } else if (msg instanceof WebSocketFrame) {
+        } else if (msg instanceof WebSocketFrame) {//web  socket请求
             //-2 建立连接
         }
+
+    }
+
+    private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
+        if (!req.getDecoderResult().isSuccess() || !("".equals(req.headers().get("Upgrade")))) {
+
+        }
+    }
 }
