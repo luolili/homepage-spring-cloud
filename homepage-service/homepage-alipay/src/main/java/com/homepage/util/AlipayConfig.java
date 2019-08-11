@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AlipayConfig {
     public static final String app_id = "";
-    public static final String mechat_private_key = "";
+    public static final String merchant_private_key = "";
     public static final String alipay_public_key = "";
     public static final String notify_url = "http://localhost:8080/alipay/alipayNotifyNotice.action";
     public static final String return_url = "http://localhost:8080/alipay/alipayReturnNotice.action";

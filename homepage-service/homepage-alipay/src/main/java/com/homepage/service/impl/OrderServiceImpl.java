@@ -6,6 +6,7 @@ import com.homepage.repo.FlowRepo;
 import com.homepage.repo.OrderRepo;
 import com.homepage.service.OrderService;
 import com.homepage.util.OrderStatusEnum;
+import com.sid.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private FlowRepo flowRepo;
 
+    private Sid sid = new Sid();
 
     @Override
     public void saveOrder(Order order) {
@@ -36,7 +38,10 @@ public class OrderServiceImpl implements OrderService {
             orderRepo.save(order);
             order = getOrderById(orderId);
 
+            String flowId = sid.nextShort();
+
             Flow flow = new Flow();
+            flow.setId(flowId);
             flow.setFlowNum(alpayFlowNum);
             flow.setBuyCounts(order.getBuyCounts());
             flow.setCreateTime(new Date());
