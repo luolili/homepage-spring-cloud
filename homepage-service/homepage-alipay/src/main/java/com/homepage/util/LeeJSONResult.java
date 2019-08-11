@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class LeeJSONResult {
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -94,5 +96,31 @@ public class LeeJSONResult {
         }
         //return null;
     }
+
+    public static LeeJSONResult format(String jsoData) {
+        try {
+            return MAPPER.readValue(jsoData, LeeJSONResult.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static LeeJSONResult formatToList(String jsonData, Class<?> clazz) {
+        try {
+            JsonNode jsonNode = MAPPER.readTree(jsonData);
+            JsonNode data = jsonNode.get("data");
+            Object obj = null;
+            if (data.isArray() && data.size() > 0) {
+                obj = MAPPER.readValue(data.traverse(),
+                        MAPPER.getTypeFactory().constructCollectionType(List.class, clazz));
+            }
+            return build(jsonNode.get("status").intValue(), jsonNode.get("msg").asText(), obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
 
