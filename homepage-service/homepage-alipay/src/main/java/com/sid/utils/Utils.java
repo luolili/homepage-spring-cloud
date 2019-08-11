@@ -1,6 +1,8 @@
 package com.sid.utils;
 
 import java.io.*;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Utils {
@@ -99,5 +101,11 @@ public class Utils {
         if (idWorkerHome.isDirectory()) return idWorkerHome;
 
         throw new RuntimeException("failed to create .idworkers at user home");
+    }
+
+    public static void main(String[] args) {
+        // 2013-12-25 00:00:00.000
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Timestamp(midnightMillis())));
+        System.out.println(encode(281474976710655L));
     }
 }
