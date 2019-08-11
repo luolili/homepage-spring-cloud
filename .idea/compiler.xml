@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="homepage-alipay" />
         <module name="homepage-common" />
         <module name="homepage-course" />
         <module name="homepage-eureka" />
@@ -15,6 +14,9 @@
         <module name="homepage-zuul" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="homepage-alipay" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

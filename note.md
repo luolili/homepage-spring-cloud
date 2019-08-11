@@ -42,6 +42,9 @@ after 300000 milliseconds with 0 out of 0 bytes receive
 到
 https://github.com/Microsoft/Git-Credential-Manager-for-Windows/releases/tag/v1.14.0
 下载 GCMW-1.14.0.exe即可
+
+6. docker image与container区别
+
  #微信的消息模板
    先用服务号的账号和密码登陆，让管理员扫码；
    添加新的消息模板;
